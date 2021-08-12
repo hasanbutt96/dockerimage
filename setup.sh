@@ -1,5 +1,2 @@
 #!/bin/bash
-set -e
-service mysql start
-mysql < setup.sql
-#service mysql stop
+mysql -u root -p auth < setup.sql
