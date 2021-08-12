@@ -12,6 +12,8 @@ services:
       - MYSQL_ROOT_PASSWORD=hasan12@
       - MYSQL_DATABASE=auth
     volumes:
+      - ./sqlfiles:/docker-entrypoint-initdb.d
+
       - datafiles:/etc/mysql/conf.d
     
 
