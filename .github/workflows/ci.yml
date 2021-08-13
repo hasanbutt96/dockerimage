@@ -10,11 +10,10 @@ publish:
     entrypoint: [""] #deciding entry point for script
   services:
     - docker:dind
-    before_script:
-      - amazon-linux-extras install docker
-      - aws --version
-      - docker --version
-      - 
+  before_script:
+    - amazon-linux-extras install docker
+    - aws --version
+    - docker --version
   script:
     - docker build -t $DOCKER_REGISTRY/$APP_NAME:$CI_PIPELINE_IID .
     - aws ecr get-login-password --region $AWS_REGION| docker login --username  AWS --password-stdin $DOCKER_REGISTRY
