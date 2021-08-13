@@ -6,7 +6,9 @@ variables:
 
 jobs:
 
-  on : [push]
+  push:
+    branches:
+      - main
   publish:
     image: 
       name: amazon/aws-cli
