@@ -4,6 +4,7 @@ variables:
   DOCKER_HOST: tcp://docker:2375
   AWS_REGION: us-east-1
 
+on : [push]
 publish:
   image: 
     name: amazon/aws-cli
