@@ -1,17 +1,21 @@
-name: CI
+variables:
+  DOCKER_REGISTRY: public.ecr.aws/b9e6a7a5/
+  APP_NAME: dockerimage
+  DOCKER_HOST: tcp://docker:2375
+  AWS_REGION: us-east-1
 
-on: [push]
-
-jobs:
-  build:
-
-    runs-on: ubuntu-latest
-    
-    steps:
-    - uses: actions/checkout@v1
-    - name: Run a one-line script
-      run: echo Hello, world!
-    - name: Run a multi-line script
-      run: |
-        echo Add other actions to build,
-        echo test, and deploy your project.
+publish:
+  image: 
+    name: amazon/aws-cli
+    entrypoint: [""] #deciding entry point for script
+  service:
+    - docker:dind
+    before_script:
+      - amazon-linux-extras install docker
+      - aws --version
+      - docker --version
+      - 
+  script:
+    - docker build -t $DOCKER_REGISTRY/$APP_NAME:$CI_PIPELINE_IID .
+    - aws ecr get-login-password --region $AWS_REGION| docker login --username  AWS --password-stdin $DOCKER_REGISTRY
+    - docker push $DOCKER_REGISTRY/$APP_NAME:$CI_PIPELINE_IID

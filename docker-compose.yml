@@ -17,12 +17,6 @@ services:
       - datafiles:/etc/mysql/conf.d
     
 
-  adminer:
-    image: adminer
-    restart: always
-    ports:
-      - 8081:8081
-
   website:
     container_name: php73
     build:
