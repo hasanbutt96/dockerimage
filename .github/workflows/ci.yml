@@ -9,7 +9,7 @@ publish:
     name: amazon/aws-cli
     entrypoint: [""] #deciding entry point for script
   service:
-    - docker:dind
+    - docker: dind
     before_script:
       - amazon-linux-extras install docker
       - aws --version
